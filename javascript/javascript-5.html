@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>what is array?</title>
+  <style>
+    #title {
+      background-color: #333;
+      color: salmon;
+    }
+
+    /* id가 title인 값에 배경색과 글자색을 스타일링 해주었다. */
+
+    #title:hover {
+      color: #333;
+      background-color: salmon;
+    }
+
+    /* id가 title인 값에 마우스의 커서가 올라가 있을때, 적용되는 스타일링을 해주었다. */
+  </style>
+</head>
+
+<body>
+  <h1 id="title">hello</h1>
+  <!-- h1태그에 아이디를 title이란 이름을 부여했다. -->
+  <script>
+    const title = document.getElementById('title');
+    // const는 상수 선언 키워드, 선언과 할당을 동시에 하지 않으면 에러가 난다.
+    // document : 브라우저가 불러온 웹 페이지
+    // getElementById('') : 주어진 문자열과 일치하는 id속성을 가진 요소를 찾아서 element객체를 반환
+    // title 에 document에서 title이란 아이디값을 갖고 있는 값으로 할당하였다.
+
+    const arrayData = ["피카츄", "라이츄", "파이리", "꼬부기", "버터풀", "야도란", "피죤투", "또가스"];
+    // arrayData에 배열을 할당하였다.
+
+    // // count variable initialize
+    let count = 0;
+    // count 에 0을 할당하였다.
+
+    // // interval function
+    let timer = setInterval(() => {
+      // () => {} === function(){}
+      // timer에 setInterval()이란 함수를 할당
+      if (count < arrayData.length) {
+        // count의 값이 arrayData 배열의 원소 개수 보다 작다면,
+        // console.log(arrayData.length)
+        // arrayData.length = 8;
+        // // if count value less than arrayData length is "true"
+        title.textContent = arrayData[count];
+        // title의 하위요소에 textContent가 있다.
+        // arrayData[count] : count 값이 arrayDay의 인덱스번호가 되어서 인덱스 번호에 해당하는 항목을 출력
+        // title.textContent 에 arrayData[count]값을 출력
+        // count === 0 이면, title.textContent에 "피카츄" 값을 대입, 출력
+        count++;
+        // // count = count + 1;
+        // // two operand one operator, binart operator.
+
+        // if 문 해석 : 일단 count값이 0 이므로, if문을 실행 시켰을때 참이므로, title.textConent는 arrayData[0]번으로 할당,
+        //count++에 의해 count값은 다시 1로 재할당 되어 if문을 다시 실행하게 된다.
+      } else {
+        // // too much increase count value
+        count = 0;
+        // count값이 계속 재할당되다가 8보다 크게 되면, count가 0으로 재할당되어 if문 값이 true가 되어 다시 반복해서 실행된다.
+      }
+    }, 1000);
+
+    // setInterval(() => {},1000)
+    // 1초의 간격으로 함수가 실행된다.
+    // setInterval()은 따로 호출을 중단하지 않으면 계속 실행된다.
+
+
+
+    title.addEventListener('click', () => {
+      // title에 aaddEventListener() 메서드를 이용해 이벤트를 등록해준다.
+      // 'click' 이라는 이벤트가 발생하면, 함수를 실행시켜준다.
+      clearInterval(timer);
+      // timer라는 매개변수의 setInterval() 함수의 실행을 종료 시킨다.
+      title.textContent = "end";
+      // title.textContent 에 end 라는 값을 할당
+    });
+
+
+  </script>
+</body>
+
+</html>
