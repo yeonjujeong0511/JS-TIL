@@ -21,16 +21,24 @@
   <script>
     let root = document.getElementById('root');
     // // 태그에 커스텀된 id 속성노드(attribute node)로 문서의 데이터에 접근
+    // 속성 노드(atrribute node) : 해당 속성의 속성 값
     // 문서에 id가 root인 값을 변수 root에 할당
     let liItems = document.getElementsByTagName("li");
     // // 문서에 tagname을 기준으로 모두 수집 "배열로 반환"
-    // 문서에 태그네임이 
+    // 문서에 태그네임이 li 인 항목들을 liItems에 할당 
+    // 배열로 가져와진다.
+    //getElementsByTagName() : HTML 컬렉션을 반환
     let section = document.querySelector('#root > section');
     // // selector(선택자) + qeurt(질의) : CSS의 선택자 방식으로 문서의 데이터에 접근
+    // querySelector() : 선택자 또는 선택자 뭉치를 반환 / css 선택자여야 한다
+    // 문서의 id가 root 고 자식요소가 section인 것을 반환에 변수에 할당 
     let liSelectorAll = document.querySelectorAll('#root > ul > li');
     // // CSS 선택자 방식으로 데이터에 접근, All 목적에 부합하는 모든 데이터를 수집
+    // querySelectorAll() : 선택자를 만족하는 모든 요소의 목록이 필요하면 All로
+    // 문서의 id가 root고 자식요소가 ul 또 그 자식요소가 li인 모든 요소들을 변수 liSeledtorAll에 할당
     let article = document.getElementsByClassName('class-attribute')
     // // 함수에 선택된 이름의 클래스라면 모두 '배열로 반환'
+    // 문서의 해당 클래스를 가진 모든 요소들을 변수 article에 할당
     console.log(root);
     console.log(liItems);
     console.log(section);
