@@ -23,20 +23,30 @@
     let colorArray = ["#111", "#222", "#333", "#444", "#555", "#666"];
     // 변수 colorArray에 배열을 할당
     let commendType = window.document.body.children[0].children;
-    // 변수 commendType에 
+    // window : 전역변수
+    // 변수 commendType에 document bodyd의 0번째 자식요소의 자식들을 할당
     console.log(commendType);
-    console.dir(commendType);
+    //console.dir(commendType);
+
     let declrationType = document.getElementsByTagName("section");
+    // declrationType 변수에 document안에 section이란 태그네임을 가진 요소를 할당
     console.log(declrationType);
 
     for (let i = 0; i < commendType.length; i++) {
+      // 반복문 : 변수 1는 0으로 초기화, commendType의 요소들의 개수보다 적을때, i는 1씩 증가한다.
       if (commendType.length === members.length) {
+        // if 조건문 : commendTpye의 요소의 개수와 members 배열의 항목 개수가 같을 때 아래가 작동한다.
         commendType[i].textContent = members[i];
+        // commendType안에 각각 요소들의 textContent members 배열의 각각 요소들을 할당
         declrationType[i].style.width = "100vw";
         declrationType[i].style.height = "10vh";
         declrationType[i].style.color = "#fff";
         declrationType[i].style.backgroundColor = colorArray[i];
+        // declrationType 각각 요소에 스타일링
+        // width 값 100vw, height 10vh, 글자색 #fff
+        // 배경색은 colorArray 배열 각각 항목들을 i번대로 할당시킨다.
       } else {
+        // if 조건문에 적합하지않을때(false), 콘솔에 아래 문장을 출력한다.
         console.log("배열들의 길이가 달라, 안전을 위해 실행시키지 않겠습니다.");
       }
     }
