@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const root = document.getElementById('root');
+    root.style.width = "100vw";
+    root.style.height = "100vh";
+  
+  function gugudan (number,limit){
+  let multiplyCounter= 0;
+  let resultArray = [];
+  
+  for (let i = 1; i <= limit; i++){
+    let result = number * i;
+    let guguresult = "<li>" +number + " * " + i + " = " + result + "</li>"
+    resultArray.push(guguresult);
+    multiplyCounter++;
+
+    //Q-3. 실수(소숫점이 있는 수)를 위의 조건에 처리 했을 때 소숫점 첫번째 자리까지만 출력되도록 처리하세요.
+
+    result.toFixed(1)
+
+    //Q-4. 음수(0보다 작은 수) 를 처리 했을 때 "절대값"이 출력되도록 처리하세요.
+
+    Math.abs(result)
+
+  }
+
+  //Q-2. 백엔드 요청 : "스텝측정을 해야하므로, 곱셈이 몇 회 일어났는지 변수 multiplyCounter에 산출해 주세요."
+  console.log(multiplyCounter+"번")
+  return resultArray;
+
+  
+}
+
+
+//Q-1. 프론트엔드 요청 : "초등학생을 위해서 구구단 표를 HTML에 출력해 주세요."
+
+root.innerHTML = gugudan(3,9).join('') + gugudan(4,9).join('') + gugudan(5,9).join('')  + gugudan(6,9).join('')  + gugudan(7,9).join('') + + gugudan(8,9).join('')  + gugudan(9,9).join('')
+
+
+//Q-5. 수열의 합, 시그마 로직을 구현하세요. (에를 들어 1단의 총 합계 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 합계)  // 해결하지 못함
+
+    //let resultSum = 
+
+
+    //Q-6. HTML에 나타난 구구단 중 항목 하나를 클릭하면 '클릭된 요소'가 삭제되도록 처리하세요.
+    //Q-7. Q-6번 기능에 더해 삭제된 요소가 다섯번단위로 누적되면, 삭제된 요소의 결과값 총합을 경고창(alert())으로 보이게 조치하세요.
+    
+    console.dir(root.children)
+    let gugudanList = root.children;
+    
+    let count =0;
+    for (let i = 0; i < gugudanList.length; i++)
+      gugudanList[i].addEventListener('click',function(){
+      gugudanList[i].style.display = "none";
+      count++;
+      if (count % 5 === 0 ){
+        window.alert('클릭 수 5회마다 경고')
+      }
+    })
+
+
+
+  </script>
+</body>
+</html>
