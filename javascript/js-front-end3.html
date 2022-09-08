@@ -70,6 +70,22 @@
       // if문의 값이 false라면 콘솔에 '숫자 맞춰서 가져와라' 를 출력
     }
 
+
+
+    // +++ 코드를 추가했을 때 무슨일이 일어날 것인가
+    const container = document.querySelector('#root > ul');
+    // 변수 container에 문서안에 root태그의 자식요소가 ul인 요소를 할당
+    console.log(container);
+    container.addEventListener('click', function (event) {
+      // 변수 container에 이벤트를 발생시켰다
+      console.log(event);
+      event.target.style.backgroundColor = "#333";
+      event.target.style.color = "#ccc";
+      // click 이벤트가 발생하면 스타일링이 적용된다.
+      // 궁금한점 : event.target은 규칙같은 것인가
+      // --> event가 이루어지는 target에 적용한다는 것으로, 규칙같은 느낌이라고 생각하자
+    })
+
   </script>
 </body>
 
