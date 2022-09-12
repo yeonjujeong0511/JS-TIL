@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        const root = document.getElementById("root");
+        // 변수 root에 문서에 아이디값이 root인 요소를 할당
+        const ul = root.children[0];
+        // 변수 ul에 root의 0번째 자식요소를 할당
+        const liItems = ul.children;
+        // 변수 liItems에 ul의 자식요소들을 할당
+        console.log(liItems.length); // 5
+        const liTextNode = ["피카츄","라이츄","파이리","꼬부기","버터풀"];
+        // liTextNode에 배열을 할당
+        console.log(ul);
+        for(let i = 0; i < liItems.length; i++){
+            //반복문 실행
+            liItems[i].textContent = liTextNode[i];
+            // liItems의 각각 항목의 textContent에 liTextNode 배열의 각각 항목들을 할당
+            liItems[i].style.width = "100vw";
+            // liItems의 각각 항목의 width값을 100vw로 할당
+            liItems[i].style.height = ( 100 / liItems.length ) + "vh";
+            // liItems의 각각 항목의 height값을 100 / 6을 한 값으로 할당
+        }
+
+        function menuToggler(container, checkElementString){
+            // menuTOggler 라는 함수를 선언
+            if(typeof checkElementString === "string"){
+                // checkElementString에 해당하는 매개변수가 문자열이면 아래 조건문을 또 실행
+                if(container.tagName === checkElementString.toUpperCase()){
+                    //container의태그명과 checkElementString를 대문자로 바꾼값이 일치한다면
+                    let isStatus = true;
+                    // 실행, isStatus란 변수에 true라는 값을 할당
+                    container.addEventListener('click',function(event){
+                        // container를 클릭하면 함수가 실행
+                        if(isStatus === true){
+                            // 함수가 실행되는 조건, isStatus의 값이 ture이면,
+                            event.target.style.backgroundColor = "salmon";
+                            // event.target --> container의 배경색을 salmon 으로 바꿔라
+                        } else {
+                            event.target.style.backgroundColor = "cadetblue";
+                            // 조건문의 값이 false면 배경색을 cadetblue로 바꿔라
+                        }
+                    });
+                }
+            }
+        }
+        menuToggler(ul,"ul");
+        // menuToggler 함수 실행
+        console.log("yahooooooooooo")
+        // console에yahooooooooooo 출력
+    </script>
+</body>
+</html>

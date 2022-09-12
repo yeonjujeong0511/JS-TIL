@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #root {
+      width: 100vw;
+      height: 100vh;
+      background-color: #333;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #root>h1 {
+      color: #ccc;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <h1 id="x-position"></h1>
+    <h1 id="y-position"></h1>
+  </div>
+  <script>
+    const xPosition = document.getElementById('x-position');
+    // xPosition 변수에 문서안에 x-position이란 아이디를 가진 요소를 할당
+    const yPosition = document.getElementById('y-position');
+    // yPosition 변수에 문서안에 y-position이란 아이디를 가진 요소를 할당
+    console.log(xPosition, yPosition);
+    console.dir(window)
+    window.addEventListener('mouseover', function (event) {
+      // window : 브라우저 탭에 존재하는 자바스크립트 전역 최상위객체
+      // mouseover : 특정객체 위에 마우스가 올려졌을때,
+      console.log(event.offsetX);
+      console.log(event.offsetY);
+      // 콘솔에 event를 당하는(window)의 offsetX 값과 offsetY값을 출력
+      xPosition.textContent = event.offsetX;
+      // xPosition의 textContent요소에 window의 offsetX값을 할당
+      yPosition.textContent = event.offsetY;
+      // yPosition의 textContent요소에 window의 offsetY값을 할당
+    })
+  </script>
+  </body>
+
+</html>
