@@ -7,5 +7,5 @@ function exampleFunction ( parameterOne, parameterTwo ) {
     return localVariable;
     // 함수를 호출하면 localVariable을 출력
     }
-//console.log(localVariable) // eroor
+//console.log(localVariable) // error
 console.log(exampleFunction(1,2)) // 6
