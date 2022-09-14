@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    const domInit = {
+      root: document.getElementById("root")
+    }
+    // domInit이란 변수에 객체를 할당
+    // 객체는 이름과 값으로 구성된 프로퍼티(property)
+    // root란 이름을 가지고 있고, 값은 문서 안에 id값이 root인 것
+    // 위 프로퍼티를 domInit에 할당
+
+    // * 여러개를 식별한 객체를 만들어 분류했다.
+    const domStyling = {
+      size: function (element, widthValue, heightValue) {
+        element.style.width = widthValue;
+        element.style.height = heightValue;
+      },
+      bgColor: function (element, backgroundColor) {
+        console.log(this);
+        // * 여기서 this는 메서드를 묶어놓은 domStyling이란 객체를 가리키고 있다.
+        element.style.backgroundColor = backgroundColor;
+      }
+    }
+    // domStyling 변수에 프로퍼티를 함수로 넣었다.
+
+    // * DOM 스타일링을 하는 여러가지 함수를 넣을 예정으로 가정하고,
+    // * 하나의 기억하고 관리하기 쉽도록 객체에 '메서드화' 하였다.
+    domStyling.size(domInit.root, "100vw", "100vh");
+    domStyling.bgColor(domInit.root, "#333");
+    // * '메서드'를 호출 간편하게 스타일링을 완료 하였다.
+  </script>
+</body>
+
+</html>
