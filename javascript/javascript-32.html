@@ -12,27 +12,45 @@
   <div id="root"></div>
   <script>
     const root = document.getElementById("root");
+    // 변수 root에 #root 할당
     root.style.display = "flex";
     root.style.justifyContent = "center";
     root.style.alignItems = "center";
     root.style.flexWrap = "wrap";
+    // root 스타일링
+
     const propertyList = [];
+    // propertyList 변수에 빈 배열 할당
     for (const props in root) {
       propertyList.push(props);
     }
+    console.dir(root);
+    // root를 콘솔에 찍어보면, 객체형태로 되어있다.
+    // 빈 배열 propertyList에 root의 키만 항목으로 넣어준다.
+    console.log(propertyList);
     const alphabetCorrect = propertyList.filter(function (element) {
       return element[0] === "o";
     });
+    // filter() : 함수에 적합한값만 모아 새로운 배열을 만든다.
+    // propertyList의 항목들 중에 첫번째 글짜가 'o' 인 항목을 모아 
+    // alphabetCorrect 변수에 새 배열로 할당 
+    console.log(alphabetCorrect); // 새로운 배열 
     function TagList(element, index) {
       this.id = index;
       this.name = element;
     }
+    // TagList 라는 함수 선언
+    // 매개변수 index는 id 값으로 할당
+    // 매개변수 element는 name 값으로 할당
     const setResult = [];
+    // setResult라는 변수에 빈 배열 할당
     let counter = 0;
+    // counter라는 변수에 0을 할당
     alphabetCorrect.forEach(function (element, index) {
       setResult.push(new TagList(element, index));
       counter++;
     })
+    // alphabetCorrect 배열에 
     console.log("----------------------");
     function tagMaker(parnetElement, tagName, array, counter) {
       for (let i = 0; i < counter; i++) {
@@ -40,8 +58,15 @@
         element.style.width = counter + "px";
         element.style.height = counter + "px";
         element.style.backgroundColor = `rgba(${counter},${counter},${counter})`;
+        element.style.margin = counter / counter + "px";
+        element.textContent = array[i].name;
+        parnetElement.appendChild(element);
       }
     }
+    tagMaker(root,"div",setResult,counter);
+    root.addEventListener('click',function(event){
+      event.target.style.backgroundColor = "cadetblue";
+    })
   </script>
 </body>
 
