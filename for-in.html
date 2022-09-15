@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    const root = document.getElementById('root')
+    // 변수 root 할당
+    const rootstyle = {
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "#333",
+      color: "#fff"
+    }
+    function elementStyling(element, styleProps) {
+      for (const key in styleProps) {
+        element.style[key] = styleProps[key];
+        console.log(key)
+        console.log(styleProps[key])
+      }
+    }
+    elementStyling(root, rootstyle);
+    // 함수 elementStyling 선언
+    // elemnert 매개변수 자자리에 인수 root 할당
+    // for in 문으로 매개변수 styleProps 매개변수자리에 인수 rootstyle할당
+    // root
+    // element.style[key] 에 styleProps[key]로 할당
+    // root.style.width  = "#333" 의 의미로 할당된다.
+    console.dir(root)
+  </script>
+</body>
+
+</html>
