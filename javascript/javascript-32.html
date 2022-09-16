@@ -39,7 +39,7 @@
       this.id = index;
       this.name = element;
     }
-    // TagList 라는 함수 선언
+    // TagList 라는 생성자함수 선언
     // 매개변수 index는 id 값으로 할당
     // 매개변수 element는 name 값으로 할당
     const setResult = [];
@@ -49,24 +49,49 @@
     alphabetCorrect.forEach(function (element, index) {
       setResult.push(new TagList(element, index));
       counter++;
+      console.log(counter);
+      console.log(setResult)
     })
-    // alphabetCorrect 배열에 
+    // alphabetCorrect 배열을 순회히하면서, 요소랑 인덱스 값을 받는데,
+    // TagList 객체를 setResult 배열에 각 항목으로 push할 것
+    // setResult의 0번째 항목은 
+    // TagList {id: 0, name: 'offsetParent'}
+    // 실행될때마다 counter의 값은 증가
+    // alphabetCorrect의 length만큼 반복하기때문에 counter의 값은 111이 된다.
     console.log("----------------------");
+
     function tagMaker(parnetElement, tagName, array, counter) {
+      // tagMaker 함수 선언
       for (let i = 0; i < counter; i++) {
         let element = document.createElement(tagName);
+        // element 변수에 매개변수 tagName의 값을 받으면 문서의 요소를 만들어서 할당한다.
+        // 할당된 element 변수는 반복문에 의해, 계속 값이만들어지고, 스타일링이 된다.
         element.style.width = counter + "px";
         element.style.height = counter + "px";
         element.style.backgroundColor = `rgba(${counter},${counter},${counter})`;
         element.style.margin = counter / counter + "px";
         element.textContent = array[i].name;
+        // 변수 element들의 textContent는 매개변수 array 배열의 항목의 name값이 할당된다.
         parnetElement.appendChild(element);
+        // 매개변수 parentElement 의 자식요소로 element변수값이 붙여진다.
       }
     }
-    tagMaker(root,"div",setResult,counter);
-    root.addEventListener('click',function(event){
+
+    tagMaker(root, "div", setResult, counter);
+    // console.log(setResult[0].name)
+
+    // tagMaker함수 호출
+    // 인자 counter의 값과 같아지지 않을만큼 반복문을 실행한다.
+    // tagname이 인자 div이므로 변수 element는 div태그를 문서의 요소로 만든다.
+    // 스타일링하고, setResult의 name값을 만들어진 div태그에 textContent로 할당한다.
+    // div태그값을 모두 root의 자식요소로 붙인다.
+
+    root.addEventListener('click', function (event) {
       event.target.style.backgroundColor = "cadetblue";
     })
+
+    // root를 클릭하면 배경색이 cadetblue로 바뀌는 이벤트를 생성했다.
+
   </script>
 </body>
 
