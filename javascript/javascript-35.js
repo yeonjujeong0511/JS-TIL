@@ -28,3 +28,5 @@ interval(count,1000,10);
 // 콘솔에 1초마다 1부터 10까지 1초마다 출력
 
 // * setTimeout()을 응용한 것이 setInterval()이다.
+
+// 확인
