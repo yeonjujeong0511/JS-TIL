@@ -12,3 +12,6 @@ console.log('3');
 // 엔진으로 들어간 그 찰나의 순간 console.log('3')이 실행
 // 콘솔에 3 출력 
 // 출력한 후에 setimeout함수안에 console.log('2')실행
+
+
+// 비동기 
