@@ -1,18 +1,16 @@
 const inputBox = document.getElementById("input-box");
 const todoListElem = document.getElementById("todo-list");
-console.log(todoListElem);
+
 let todoList = [];
 //할 일 받을 배열
 let id = 0;
 
 const setTodoList = (newTodoList) => {
   todoList = newTodoList;
-  console.log("셋투두리스트");
 };
 // setTodoList함수가 발생하면, 기존의 todolist가 newtodolist가 된다.
 
 const getAllTodoList = () => {
-  console.log("겟올투두리스트");
   return todoList;
 };
 // getAllTodoList 힘수가 발생하면 기존 todolist를 가져온다.
@@ -26,10 +24,32 @@ const appendTodos = (text) => {
   });
   // 기존의 todolist를 가져온후, 추가된 할일을 새배열인 newtodolist에 저장시킨다.
   setTodoList(newTodoList);
-  console.log("어펜드");
   paintToDoList();
-  console.log("프린트");
-  console.log(newTodoList);
+};
+
+// const deleteTodo = (todoId) => {
+//   console.log(todoId);
+//   const newTodos = getAllTodoList().filter((todo) => {
+//     todo.id !== todoId;
+//   });
+//   setTodoList(newTodos);
+//   paintToDoList();
+// };
+
+const deleteTodo = (todoId) => {
+  console.log(todoId);
+  const newTodos = getAllTodoList().filter((todo) => todo.id !== todo);
+  console.log(newTodos);
+  setTodoList(newTodos);
+  paintToDoList();
+};
+
+const completeTodo = (todoId) => {
+  const newTodos = getAllTodoList().map((todo) =>
+    todo.id === todoId ? { ...todo, isCompleted: !todo.isCompleted } : todo
+  );
+  setTodoList(newTodos);
+  paintToDoList();
 };
 
 const paintToDoList = () => {
@@ -57,7 +77,7 @@ const paintToDoList = () => {
     delBtnElem.src = "./etc/close.svg";
     delBtnElem.classList.add("delBtn");
     delBtnElem.addEventListener("click", () => {
-      deleteTodo(todo);
+      deleteTodo(todo.id);
     });
 
     if (todo.isCompleted) {
@@ -71,24 +91,6 @@ const paintToDoList = () => {
 
     todoListElem.appendChild(todoItemElem);
   });
-};
-
-const deleteTodo = (todoId) => {
-  const newTodos = getAllTodoList().filter((todo) => {
-    todo.id !== todoId;
-    console.log(todo, todo.id);
-  });
-  setTodoList(newTodos);
-  console.log(newTodos);
-  paintToDoList();
-};
-
-const completeTodo = (todoId) => {
-  const newTodos = getAllTodoList().map((todo) =>
-    todo.id === todoId ? { ...todo, isCompleted: !todo.isCompleted } : todo
-  );
-  setTodoList(newTodos);
-  paintToDoList();
 };
 
 const init = () => {
