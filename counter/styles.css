@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* 반응형 화면 크기 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.section-center {
+  display: flex;
+}
+.section-center > article:nth-child(1) img {
+  width: 500px;
+}
+
+@media (min-width: 1024px) {
+  .deadline-format {
+    display: flex;
+  }
+  .deadline-format > div {
+    width: 80px;
+    height: 95px;
+    background-color: forestgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .deadline-format > div > h4 {
+    font-size: 2rem;
+  }
+}/*# sourceMappingURL=styles.css.map */
