@@ -1,26 +1,26 @@
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "1월",
+  "2월",
+  "3월",
+  "4월",
+  "5월",
+  "6월",
+  "7월",
+  "8월",
+  "9월",
+  "10월",
+  "11월",
+  "12월",
 ];
 
 const weekdays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "일요일",
+  "월요일",
+  "화요일",
+  "수요일",
+  "목요일",
+  "금요일",
+  "토요일",
 ];
 
 const giveaway = document.querySelector(".giveaway");
@@ -34,14 +34,13 @@ const year = futureDate.getFullYear();
 const hour = futureDate.getHours();
 const minutes = futureDate.getMinutes();
 
-let month = futureDate.getMonth();
-month = months[month];
+const month = months[futureDate.getMonth()];
 
 const date = futureDate.getDate();
 
 const weekday = weekdays[futureDate.getDay()];
 //console.log(weekday);
-giveaway.textContent = `give ends on ${year} ${month} ${date} ${weekday} ${hour}:${minutes}pm`;
+giveaway.textContent = `${year}년 ${month} ${date}일 ${weekday} ${hour}:0${minutes}pm`;
 
 // 디데이 ms
 const futureTime = futureDate.getTime();
