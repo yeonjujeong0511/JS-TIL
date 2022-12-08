@@ -9,7 +9,8 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .deadline-format {
@@ -28,6 +29,58 @@ body {
 }
 .deadline-format > div > h4 {
   font-size: 2rem;
+}
+
+.memo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.memo-section > h2 {
+  font-size: 50px;
+}
+.memo-section > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.memo-section > div:nth-child(2) > input,
+.memo-section > div:nth-child(2) textarea {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+}
+.memo-section > div:nth-child(2) > input:focus,
+.memo-section > div:nth-child(2) textarea:focus {
+  outline: 0;
+}
+
+.btn {
+  width: 60px;
+  padding: 7px;
+  color: white;
+  background-color: darkgreen;
+  border: 1px solid darkgreen;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  margin-top: 10px;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:hover {
+  background: darkgreen;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.377);
+}
+
+.warning {
+  border-color: rgba(255, 111, 89, 0.8) !important;
 }
 
 @media (min-width: 1024px) {
@@ -50,6 +103,22 @@ body {
   }
   .section-center > article:nth-child(2) > h4 {
     font-size: 25px;
+  }
+  .memo-section > div:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .memo-section > div:nth-child(3) .memo-list {
+    width: 90vw;
+    height: 90vh;
+  }
+  .memo-section > div:nth-child(3) .memo-list .memoitem {
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 0, 0.493);
+    padding: 30px;
+    box-shadow: 0 0 8px rgba(100, 100, 100, 0.247);
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
