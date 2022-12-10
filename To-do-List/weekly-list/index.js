@@ -3,7 +3,17 @@ const todoListElem = document.getElementById("todo-list");
 
 let todoList = [];
 //할 일 받을 배열
-let id = 0;
+
+const TODOLIST = todoList;
+
+const loadTodo = (todo) => {
+  const loadedTodoList = localStorage.getItem(TODOLIST, todo);
+  if (loadedTodoList !== null) {
+    console.log(JSON.parse(loadedTodoList));
+    setTodoList(JSON.parse(loadedTodoList));
+    paintToDoList();
+  }
+};
 
 const setTodoList = (newTodoList) => {
   todoList = newTodoList;
@@ -16,31 +26,26 @@ const getAllTodoList = () => {
 // getAllTodoList 힘수가 발생하면 기존 todolist를 가져온다.
 
 const appendTodos = (text) => {
-  const newId = id++;
   const newTodoList = getAllTodoList().concat({
-    id: newId,
+    id: getAllTodoList().length,
     isCompleted: false,
     content: text,
   });
   // 기존의 todolist를 가져온후, 추가된 할일을 새배열인 newtodolist에 저장시킨다.
+  localStorage.setItem(TODOLIST, JSON.stringify(newTodoList));
   setTodoList(newTodoList);
   paintToDoList();
 };
 
-// const deleteTodo = (todoId) => {
-//   console.log(todoId);
-//   const newTodos = getAllTodoList().filter((todo) => {
-//     todo.id !== todoId;
-//   });
-//   setTodoList(newTodos);
-//   paintToDoList();
-// };
-
 const deleteTodo = (todoId) => {
   console.log(todoId);
-  const newTodos = getAllTodoList().filter((todo) => todo.id !== todo);
+  const newTodos = getAllTodoList().filter((todo) => todo.id !== todoId);
+  //   const newTodos = getAllTodoList().filter((todo) => {todo.id !== todo});
+  // 중괄호로 묶어버려서 계속 빈배열이 나왔다.
+  // 중괄호로 묶으려면 return값을 줬어야했는데ㅠㅠ
   console.log(newTodos);
   setTodoList(newTodos);
+  localStorage.setItem(TODOLIST, JSON.stringify(newTodos));
   paintToDoList();
 };
 
@@ -83,7 +88,6 @@ const paintToDoList = () => {
     if (todo.isCompleted) {
       todoItemElem.classList.add("checked");
       checkboxElem.checked = todo.isCompleted;
-      console.log("여기까지가능");
     }
     todoItemElem.appendChild(checkboxElem);
     todoItemElem.appendChild(todoElem);
@@ -94,6 +98,7 @@ const paintToDoList = () => {
 };
 
 const init = () => {
+  loadTodo();
   inputBox.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
