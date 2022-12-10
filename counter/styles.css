@@ -37,7 +37,8 @@ body {
   align-items: center;
 }
 .memo-section > h2 {
-  font-size: 50px;
+  font-size: 40px;
+  margin-bottom: 20px;
 }
 .memo-section > div:nth-child(2) {
   display: flex;
@@ -46,7 +47,7 @@ body {
 }
 .memo-section > div:nth-child(2) > input,
 .memo-section > div:nth-child(2) textarea {
-  width: 100%;
+  width: 200%;
   border-radius: 5px;
   padding: 10px;
   font-size: 20px;
@@ -79,8 +80,47 @@ body {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.377);
 }
 
+.del-btn {
+  width: 60px;
+  padding: 7px;
+  color: white;
+  font-weight: 600;
+  background-color: rgba(231, 203, 133, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.098);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.del-btn:hover {
+  background-color: rgb(231, 203, 133);
+}
+
 .warning {
   border-color: rgba(255, 111, 89, 0.8) !important;
+}
+
+#memo-list {
+  display: flex;
+  padding: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.memo-item {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(255, 247, 0, 0.45);
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(102, 102, 102, 0.184);
+  margin: 20px;
+}
+.memo-item > p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
 }
 
 @media (min-width: 1024px) {
@@ -103,22 +143,6 @@ body {
   }
   .section-center > article:nth-child(2) > h4 {
     font-size: 25px;
-  }
-  .memo-section > div:nth-child(3) {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-  .memo-section > div:nth-child(3) .memo-list {
-    width: 90vw;
-    height: 90vh;
-  }
-  .memo-section > div:nth-child(3) .memo-list .memoitem {
-    width: 300px;
-    height: 300px;
-    background-color: rgba(255, 255, 0, 0.493);
-    padding: 30px;
-    box-shadow: 0 0 8px rgba(100, 100, 100, 0.247);
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {

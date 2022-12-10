@@ -100,8 +100,10 @@ let countdown = setInterval(getRemainingTime, 1000);
 
 getRemainingTime();
 
-const memoList = document.querySelector("memo-list");
+/* memo만들기 */
 
+const memoList = document.getElementById("memo-list");
+console.log(memoList);
 let memoId = 1;
 
 function Memo(id, title, content) {
@@ -112,32 +114,41 @@ function Memo(id, title, content) {
 
 // 추가 버튼 클릭 이벤트
 function eventListenners() {
+  // 페이지 로딩될때, 저장된 메모 보여주기
   document.addEventListener("DOMContentLoaded", displayMemo);
+  // 추가 버튼을 누르면 메모가 추가
   document.getElementById("add-note-btn").addEventListener("click", addNewMemo);
+  // 삭제버튼을 누르면 메모 삭제
+  memoList.addEventListener("click", deleteMemo);
 }
 
 eventListenners();
 
-// local storage
+// localstorage에서 데이터 가져오기
 function getDataFromStorage() {
   return localStorage.getItem("memos")
     ? JSON.parse(localStorage.getItem("memos"))
     : [];
+  // localstorage에 memos가 있으면, 가져오고, 없으면 빈걸 보여준다.
 }
 
-// 메모 div 만들기
-
+// 메모 추가하기
 function addNewMemo() {
+  // input, textarea 가져오기
   const memoTItle = document.getElementById("memo-title");
   const memoContent = document.getElementById("memo-content");
   if (validateInput(memoTItle, memoContent)) {
     let memos = getDataFromStorage();
+    // storage에서 가져온 데이터를 memos에 할당
     let memoItem = new Memo(memoId, memoTItle.value, memoContent.value);
+    // input,textarea에서 받아온 값을 memoitem에 객체로 저장
     memoId++;
     memos.push(memoItem);
+    // memoitem을 화면에 보여주기
     createMemo(memoItem);
-    // local storge에 저장
+    // 객체로 저장한것을 storage에 저장
     localStorage.setItem("memos", JSON.stringify(memos));
+    // 저장되면, 다시 input,memocontent는 빈칸으로
     memoTItle.value = "";
     memoContent.value = "";
   }
@@ -160,20 +171,29 @@ function validateInput(title, content) {
   }, 1600);
 }
 
+// 메모 생성
 function createMemo(memoItem) {
+  // html에 마크업한거와 같은 구조로 만든다
   const div = document.createElement("div");
   div.classList.add("memo-item");
+  // 만든 div에 클래스이름을 붙인다.
   div.setAttribute("data-id", memoItem.id);
+  // .setAttribute(속성명,속성값);
   div.innerHTML = `
   <h3>${memoItem.title}</h3>
   <p>${memoItem.content}</p>
-  <button type="button" class="btn" id="del-memos-btn">삭제</button>
+  <button type="button" class="del-btn">삭제</button>
   `;
+  // memoitem에서 받은 값을 div안에 넣어준다.
   memoList.appendChild(div);
+  // memolist의 자식으로 붙여준다.
 }
+//console.log(memoList);
 
 function displayMemo() {
   let memos = getDataFromStorage();
+  // localstorage에 데이터를 받아온다.
+  // memo의 id값을 준다.
   if (memos.length > 0) {
     memoId = memos[memos.length - 1].id;
     memoId++;
@@ -181,4 +201,23 @@ function displayMemo() {
     memoId = 1;
   }
   memos.forEach((item) => createMemo(item));
+}
+
+// 메모 삭제
+function deleteMemo(e) {
+  if (e.target.classList.contains("del-btn")) {
+    // 해당 클래스가 자식요소인지 확인
+    e.target.parentElement.remove();
+    // true면 부모 요소를 지운다.
+    let divID = e.target.parentElement.dataset.id;
+    //console.dir(e.target.parentElement);
+    //console.log(divID);
+    let memos = getDataFromStorage();
+    // localstorage에 저장된 데이터를 불러와서, 새 배열로 만들어준다.
+    let newMemoList = memos.filter((item) => {
+      return item.id !== parseInt(divID);
+    });
+    // 삭제된 배열을 다시 localstorage에 저장해준다.
+    localStorage.setItem("memos", JSON.stringify(newMemoList));
+  }
 }
