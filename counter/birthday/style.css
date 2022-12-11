@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* 반응형 화면 크기 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+img {
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */
