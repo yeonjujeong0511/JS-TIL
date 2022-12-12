@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+ul {
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aqua;
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  font-size: 30px;
+  justify-content: space-around;
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+#home {
+  height: 800px;
+  background-color: blanchedalmond;
+}
+#about {
+  height: 800px;
+  background-color: wheat;
+}
+
+#services {
+  height: 800px;
+  background-color: aquamarine;
+}
+
+#tours {
+  height: 800px;
+  background-color: darkcyan;
+}
