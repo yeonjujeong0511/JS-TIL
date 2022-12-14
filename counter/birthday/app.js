@@ -46,11 +46,11 @@ console.log(ddayTime);
 
 function getRemainingTime() {
   const today = new Date().getTime();
-  console.log(today);
+  //console.log(today);
 
   // dday시간을 산출할 수 있는 값
   const t = ddayTime - today;
-  console.log(t);
+  //console.log(t);
   /*
   console.log(t);
   1s = 1000ms
@@ -64,13 +64,13 @@ function getRemainingTime() {
 
   let days = t / oneDay;
   days = Math.floor(days);
-  console.log(days);
+  //console.log(days);
   let hours = Math.floor((t % oneDay) / oneHour);
-  console.log(hours);
+  //console.log(hours);
   let minutes = Math.floor((t % oneHour) / oneMinute);
-  console.log(minutes);
+  //console.log(minutes);
   let seconds = Math.floor((t % oneMinute) / 1000);
-  console.log(seconds);
+  // console.log(seconds);
 
   const values = [days, hours, minutes, seconds];
 
@@ -81,3 +81,49 @@ function getRemainingTime() {
 
 let countdown = setInterval(getRemainingTime, 1000);
 getRemainingTime();
+
+const select = {
+  links: document.querySelector(".links"),
+  nav: document.getElementById("nav"),
+  scrollLink: document.querySelectorAll(".scroll-link"),
+};
+
+console.log(select.scrollLink);
+
+// nav 고정
+window.addEventListener("scroll", function () {
+  const scrollHeight = window.pageYOffset;
+  console.log(scrollHeight);
+  const navHeight = select.nav.getBoundingClientRect().height;
+  if (scrollHeight > navHeight) {
+    select.nav.classList.add("fixed-nav");
+  } else {
+    select.nav.classList.remove("fixed-nav");
+  }
+});
+
+select.scrollLink.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = e.currentTarget.getAttribute("href").slice(1);
+    const element = document.getElementById(id);
+
+    const navHeight = select.nav.getBoundingClientRect().height;
+    console.log(navHeight);
+
+    const linkHeight = select.links.getBoundingClientRect().height;
+
+    const fixedNav = select.nav.classList.contains("fixed-nav");
+    let position = element.offsetTop - navHeight;
+    if (!fixedNav) {
+      position = position - navHeight;
+    }
+    if (navHeight > 82) {
+      position = position + linkHeight;
+    }
+    window.scrollTo({
+      left: 0,
+      top: position,
+    });
+  });
+});

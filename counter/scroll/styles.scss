@@ -22,25 +22,53 @@ ul {
   justify-content: space-around;
   list-style-type: none;
 }
+
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 a {
   text-decoration: none;
 }
 
 #home {
-  height: 800px;
+  height: 80vh;
   background-color: blanchedalmond;
 }
 #about {
-  height: 800px;
+  height: 80vh;
   background-color: wheat;
 }
 
 #services {
-  height: 800px;
+  height: 80vh;
   background-color: aquamarine;
 }
 
 #tours {
-  height: 800px;
+  height: 80vh;
   background-color: darkcyan;
+}
+
+.top-link {
+  font-size: 1.25rem;
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  background: brown;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  color: white;
+  animation: bounce 2s ease-in-out infinite;
+  z-index: -100;
+}
+
+.show-link {
+  visibility: visible;
+  z-index: 100;
 }
