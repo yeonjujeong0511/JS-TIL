@@ -127,3 +127,93 @@ select.scrollLink.forEach((link) => {
     });
   });
 });
+
+// * 메모만들기
+const documentMemo = {
+  memeTitle: document.getElementById("memo-title"),
+  memeContent: document.getElementById("memo-content"),
+  memoList: document.getElementById("memo-list"),
+  addBtn: document.getElementById("add-btn"),
+};
+
+function eventListenners() {
+  documentMemo.addBtn.addEventListener("click", createMemo);
+}
+eventListenners();
+
+let memoId = 1;
+
+// 메모 생성자 함수로 객체화해서 만듬
+function Memo(id, title, content) {
+  this.id = id;
+  this.title = title;
+  this.content = content;
+}
+
+// 메모 입력하기
+// 메모 빈칸여부 확인한후, 각각의 input의 value값을 memoItem에 담아 준 후 페이지에 띄울 수 있게
+// 함수 paintMemo로 값을 넘겨준다.
+// 함수가 실행될때마다, memoId는 증가
+// input value는 다시 빈칸으로
+function createMemo(e) {
+  if (validateInput(documentMemo.memeTitle, documentMemo.memeContent)) {
+    const memoItem = new Memo(
+      memoId,
+      documentMemo.memeTitle.value,
+      documentMemo.memeContent.value
+    );
+    paintMemo(memoItem);
+    console.log(memoItem);
+    memoId++;
+    documentMemo.memeTitle.value = "";
+    documentMemo.memeContent.value = "";
+  }
+}
+
+// 입력된 메모를 화면에 출력하기위한 함수
+// memo-item이라는 클래스이름을 가진 div 태그를 만들어 준다.
+// 하위 항목으로, 입력받은 메모를 넣어준다.
+// memo-item div는 memolist의 자식으로 넣어준다.
+function paintMemo(memoItem) {
+  const div = document.createElement("div");
+  div.classList.add("memo-item");
+  div.setAttribute("data-id", memoItem.id);
+  console.log(memoItem);
+  div.innerHTML = `
+  <h3>${memoItem.title}</h3>
+  <p>${memoItem.content}</p>
+  <button type="button" class="del-btn">삭제</button>
+  `;
+  documentMemo.memoList.appendChild(div);
+}
+
+// 빈칸방지용
+// 빈칸이 아니면, true 리턴
+// 빈칸이면 wrning class 추가해서, 해당 스타일링 적용
+function validateInput(title, content) {
+  if (title.value !== "" && content.value !== "") {
+    return true;
+  } else {
+    if (title.value === "") {
+      title.classList.add("warning");
+    }
+    if (content.value === "") {
+      content.classList.add("warning");
+    }
+  }
+  setTimeout(() => {
+    title.classList.remove("warning");
+    content.classList.remove("warning");
+  }, 1600);
+}
+
+// // 입력한 메모
+// function newMemo() {
+//   const memos = getDataFromStorage()
+//   const memoTitle = document.getElementById("memo-title")
+//   const memoContent = document.getElementById("memo-content")
+//   let memoItem = new Memo(memoId, memoTitle.value, memoContent.value)
+//   memoId++;
+//   memos.push(memoItem)
+
+// }
