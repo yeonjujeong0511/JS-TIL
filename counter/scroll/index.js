@@ -14,9 +14,9 @@ window.addEventListener("scroll", function () {
   // 스크롤 값이 0보다 크면, nav에 class추가
   // class 값에 nav 고정한다는 스타일링 담겨있음
   if (scrollHeight > navHeight) {
-    nav.classList.add("fixed-nav");
+    select.nav.classList.add("fixed-nav");
   } else {
-    nav.classList.remove("fixed-nav");
+    select.nav.classList.remove("fixed-nav");
   }
 
   // 스크롤 높이가 500 이상이면, 숨겨져있던 네모상자를 보여주고,
