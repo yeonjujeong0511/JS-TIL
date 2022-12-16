@@ -128,7 +128,8 @@ select.scrollLink.forEach((link) => {
   });
 });
 
-// * 메모만들기
+// * 메모만들기 * //
+
 const documentMemo = {
   memeTitle: document.getElementById("memo-title"),
   memeContent: document.getElementById("memo-content"),
@@ -137,9 +138,22 @@ const documentMemo = {
 };
 
 function eventListenners() {
+  // 화면이 띄워지면, localstorge에 저장된 메모 보여주기
+  document.addEventListener("DOMContentLoaded", displayMemo);
+
+  // 추가 버튼을 입력하면 입력된 메모가 화면에 출력될 수 있게 하였다.
   documentMemo.addBtn.addEventListener("click", createMemo);
+  // 삭제버튼 누르면 삭제
+  documentMemo.memoList.addEventListener("click", deleteMemo);
 }
 eventListenners();
+
+function getDataFromStorage() {
+  return localStorage.getItem("memos")
+    ? JSON.parse(localStorage.getItem("memos"))
+    : [];
+  // localstorage에 memos가 있으면, 가져오고, 없으면 빈걸 보여준다.
+}
 
 let memoId = 1;
 
@@ -155,16 +169,21 @@ function Memo(id, title, content) {
 // 함수 paintMemo로 값을 넘겨준다.
 // 함수가 실행될때마다, memoId는 증가
 // input value는 다시 빈칸으로
-function createMemo(e) {
+function createMemo() {
   if (validateInput(documentMemo.memeTitle, documentMemo.memeContent)) {
-    const memoItem = new Memo(
+    let messages = getDataFromStorage();
+    let memoItem = new Memo(
       memoId,
       documentMemo.memeTitle.value,
       documentMemo.memeContent.value
     );
+    memoId++;
+    messages.push(memoItem);
     paintMemo(memoItem);
     console.log(memoItem);
-    memoId++;
+    // localstorage에 메모입력값을 저장시킨다
+    localStorage.setItem("messages", JSON.stringify(messages));
+
     documentMemo.memeTitle.value = "";
     documentMemo.memeContent.value = "";
   }
@@ -207,13 +226,35 @@ function validateInput(title, content) {
   }, 1600);
 }
 
-// // 입력한 메모
-// function newMemo() {
-//   const memos = getDataFromStorage()
-//   const memoTitle = document.getElementById("memo-title")
-//   const memoContent = document.getElementById("memo-content")
-//   let memoItem = new Memo(memoId, memoTitle.value, memoContent.value)
-//   memoId++;
-//   memos.push(memoItem)
+function displayMemo() {
+  let messages = getDataFromStorage();
+  // localstorage의 데이터 가져오기
+  console.log(messages);
+  if (messages.length > 0) {
+    memoId = messages[messages.length - 1].id;
+    memoId++;
+  } else {
+    memoId = 1;
+  }
+  messages.forEach((item) => paintMemo(item));
+}
+// 새로입력 받을 memoId가 기존에 존재하는 id+1되어야 한다.
+// localstorege의 데이터가 화면에 출력시킨다.
 
-// }
+// 메모 삭제
+function deleteMemo(e) {
+  // 부모요소를 지우기 위해서 자식클래스의 요소가 있는 지 확인
+  if (e.target.classList.contains("del-btn")) {
+    e.target.parentElement.remove();
+    // 맞으면 부모 요소 지우기
+    let divID = e.target.parentElement.dataset.id;
+    // localstorage의 데이터도 삭제해야하니까 일단 불러온다.
+    let memos = getDataFromStorage();
+    let newMemoList = memos.filter((item) => {
+      return item.id !== parseInt(divID);
+    });
+    // 삭제된 아이디를 제외한 데이터를 다시 newMemoList의 담는다.
+    localStorage.setItem("memos", JSON.stringify(newMemoList));
+    // localstorage에 newMemoList를 다시 저장시켜준다.
+  }
+}
