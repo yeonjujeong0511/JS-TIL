@@ -93,7 +93,6 @@ console.log(select.scrollLink);
 // nav 고정
 window.addEventListener("scroll", function () {
   const scrollHeight = window.pageYOffset;
-  console.log(scrollHeight);
   const navHeight = select.nav.getBoundingClientRect().height;
   if (scrollHeight > navHeight) {
     select.nav.classList.add("fixed-nav");
@@ -149,8 +148,8 @@ function eventListenners() {
 eventListenners();
 
 function getDataFromStorage() {
-  return localStorage.getItem("memos")
-    ? JSON.parse(localStorage.getItem("memos"))
+  return localStorage.getItem("messages")
+    ? JSON.parse(localStorage.getItem("messages"))
     : [];
   // localstorage에 memos가 있으면, 가져오고, 없으면 빈걸 보여준다.
 }
@@ -249,12 +248,12 @@ function deleteMemo(e) {
     // 맞으면 부모 요소 지우기
     let divID = e.target.parentElement.dataset.id;
     // localstorage의 데이터도 삭제해야하니까 일단 불러온다.
-    let memos = getDataFromStorage();
-    let newMemoList = memos.filter((item) => {
+    let messages = getDataFromStorage();
+    let newMemoList = messages.filter((item) => {
       return item.id !== parseInt(divID);
     });
     // 삭제된 아이디를 제외한 데이터를 다시 newMemoList의 담는다.
-    localStorage.setItem("memos", JSON.stringify(newMemoList));
+    localStorage.setItem("messages", JSON.stringify(newMemoList));
     // localstorage에 newMemoList를 다시 저장시켜준다.
   }
 }
