@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: coral;
+}
+header > div {
+  width: 700px;
+  height: 500px;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header > div > h1 {
+  font-size: 70px;
+}
+header > div > button {
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid coral;
+  background-color: coral;
+  margin-top: 30px;
+  font-size: 20px;
+  color: white;
+}
+header > div > button:hover {
+  cursor: pointer;
+  box-shadow: 3px 1px 3px rgba(109, 2, 2, 0.39);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section > div {
+  width: 700px;
+  height: 500px;
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+section > div > h3 {
+  font-size: 70px;
+}
+section > div > button {
+  font-size: 30px;
+  border-style: none;
+  background-color: none;
+  position: relative;
+  bottom: 16rem;
+  left: 19rem;
+  cursor: pointer;
+}
+section > div > button:hover {
+  color: red;
+  transform: scale(1.3);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  z-index: 10;
+}
+
+.open-modal {
+  visibility: visible;
+  z-index: 10;
+}/*# sourceMappingURL=style.css.map */
