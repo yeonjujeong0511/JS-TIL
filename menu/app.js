@@ -28,5 +28,26 @@ const menu = [
 const menuSection = document.querySelector(".menu-section");
 
 window.addEventListener("DOMContentLoaded", function () {
-  console.log("shake and bake");
+  displayMenuItem(menu);
 });
+
+function displayMenuItem(menuItem) {
+  let displayMenu = menuItem.map((item) => {
+    return `
+    <article class="menu-item">
+          <img src=${item.img} class="photo" alt="menu item" />
+          <div class="item-info">
+            <header>
+              <h4>${item.title}</h4>
+              <h4 class="price">${item.price}</h4>
+            </header>
+            <p class="item-text">
+            ${item.desc}
+            </p>
+          </div>
+        </article>
+    `;
+  });
+  displayMenu = displayMenu.join("");
+  menuSection.innerHTML = displayMenu;
+}
