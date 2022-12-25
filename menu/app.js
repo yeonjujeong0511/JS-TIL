@@ -26,9 +26,29 @@ const menu = [
 ];
 
 const menuSection = document.querySelector(".menu-section");
+const filterBtns = document.querySelectorAll(".filter-btn");
 
+// 화면 로딩시, 메뉴 나오게 함
 window.addEventListener("DOMContentLoaded", function () {
   displayMenuItem(menu);
+});
+
+// 카테고리
+filterBtns.forEach(function (btn) {
+  btn.addEventListener("click", function (e) {
+    // console.log(e.currentTarget.dataset);
+    const category = e.currentTarget.dataset.id;
+    const menuCategoty = menu.filter(function (menuItem) {
+      if (menuItem.category === category) {
+        return menuItem;
+      }
+    });
+    if (category === "all") {
+      displayMenuItem(menu);
+    } else {
+      displayMenuItem(menuCategoty);
+    }
+  });
 });
 
 function displayMenuItem(menuItem) {
