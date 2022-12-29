@@ -4,7 +4,7 @@ const menu = [
     title: "탄탄면공방",
     category: "중식",
     price: "9900",
-    img: "",
+    img: "https://ldb-phinf.pstatic.net/20211018_153/1634546452631evE5F_JPEG/ACnjC9EIorThJmKQXBl6UPL_.jpg",
     desc: "기본 탄탄면부터 존맛탱,땅콩향이 가득가득 고소한 탄탄면~!",
   },
   {
@@ -12,7 +12,7 @@ const menu = [
     title: "토미야",
     category: "일식",
     price: "8500",
-    img: "",
+    img: "https://mp-seoul-image-production-s3.mangoplate.com/573545_1594446229880774.jpg",
     desc: "냉우동 맛집, 무조건 돈까스랑 가라야게를 같이 시켜서 먹어야한다",
   },
   {
@@ -20,7 +20,7 @@ const menu = [
     title: "소바노하나",
     category: "일식",
     price: "8500",
-    img: "",
+    img: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDA5MjlfMTMg%2FMDAxNjAxMzY1MjExNzYw.-qB5zMNMgOSdMmphKxMlwRSaSPHDazRa8vTmC3jepfMg.nMdxfKPCAUTOWv3jlSB5ttm2Y4dGDkYiKtgy3LgNT-Ag.JPEG.wldp0911%2Foutput_2625406956.jpg",
     desc: "소바랑 우동맛집, 개인적으로는 김치우동 굿굿! 돈까스가 아주 맛있다",
   },
   {
@@ -28,7 +28,7 @@ const menu = [
     title: "담양애떡갈비",
     category: "한식",
     price: "13000",
-    img: "",
+    img: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MTRfMTMx%2FMDAxNTI2MjMxMjEyODEw.vKAy88o6EBRlHlTzdKDm_JHsic4q5ohFH75QSA7FzD4g.NmYJbRI07sO2GL5B4MQGHULW1PC7AU9ynctffcqM8qMg.JPEG.ggusdng%2FIMG_1328.jpg",
     desc: "고기가 산처럼 쌓아서 나오는데, 아주 맛있음. 무조건 예약 예약 안하면 못 먹음",
   },
   {
@@ -36,8 +36,16 @@ const menu = [
     title: "오렌지블루스",
     category: "양식",
     price: "20000",
-    img: "",
+    img: "https://ldb-phinf.pstatic.net/20221018_87/1666064162918uuXhF_JPEG/IMG_5315.jpg",
     desc: "스테이크 진짜루 맛있음..파스타도 뇸뇸 굿",
+  },
+  {
+    id: 6,
+    title: "왕손곱창",
+    category: "한식",
+    price: "30000",
+    img: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTExMjFfNzkg%2FMDAxNTc0MzM4MTE1MDM3.mw688RHT471y7kytSV8w2sunC9F5JB546XOjAuc1n9Qg.q_HOqcKaZQ7ZSZKbrNuPD70T8R7qdD3-SNAtXzX_cakg.JPEG.hyevely_u%2F1574338113713.jpg",
+    desc: "여기는 진짜 최소 3인 이상 방문 추천,, 염통구이 1인분 시키고, 곱창전골 소 먹고 마지막으로 볶음밥 2인분 뿌셔야한다..",
   },
 ];
 
@@ -117,3 +125,17 @@ function displayMenuButtons() {
     });
   });
 }
+
+const secondBox = document.getElementById("second-box");
+console.log(secondBox);
+const div = document.createElement("div");
+secondBox.appendChild(div);
+console.log(secondBox.children[0]);
+
+const randomButton = document.querySelector("#second-box button");
+console.log(randomButton);
+
+randomButton.addEventListener("click", function () {
+  secondBox.children[1].innerHTML =
+    menu[parseInt(Math.random() * menu.length)].title;
+});
