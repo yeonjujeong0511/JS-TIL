@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener("load", () => {
+        <!-- #root 요소에 자식으로 <ul> 컨테이너에 <li>태그 여러개를 동적으로 생성 -->
+        function listMaker(parentElement, containerName, itemName, itemCount) {
+          let container = document.createElement(containerName);
+          for (let i = 0; i < itemCount; i++) {
+            let item = document.createElement(itemName);
+            item.textContent = i + 1;
+            container.appendChild(item);
+          }
+          parentElement.appendChild(container);
+        }
+        const root = document.getElementById("root");
+        listMaker(root, "ul", "li", 10);
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 동적으로 html 문서 생성 -->

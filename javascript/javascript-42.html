@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 클래스로 객체화
+      class PokemonData {
+        constructor(id, name, imgUrl, description) {
+          this.id = id;
+          this.name = name;
+          this.imgUrl = imgUrl;
+          this.description = description;
+        }
+      }
+      // 데이터 가져오기
+      function setPokemonJsonData(minIdNumber, maxIdNumber) {
+        let totalData = [];
+        for (let i = minIdNumber; i <= maxIdNumber; i++) {
+          // 포켓몬 api 가져오기
+          const _BASIC_URL = `https://pokeapi.co/api/v2/pokemon-species/${i}/`;
+          const request = new XMLHttpRequest();
+          // AJAX 사용하는 통신 객체
+          //서버에 데이터를 달라고 요청하는 방법
+
+          // opne() 함수를 통해 요청을 초기화
+          request.open("GET", _BASIC_URL);
+          // 수신한 데이터의 내용을 json으로 파싱하여 생성
+          request.responseType = "json";
+          // 서버에 요청보내기 , get요청 방식 일 때 사용
+          request.send();
+          // 요청이 실행될떄, 아래 화살표 함수가 실행된다.
+          request.addEventListener("load", () => {
+            //console.log(request);
+            // request 객체안에 요청받은 데이터가 response에 담겨있다.
+            const _POKEMON_API = request.response;
+            // 한국 이름 고르기
+            const getDescriptionString = (object) => {
+              //onsole.log(object, "오브젝트");
+              // 1.  인수가 객체인지 확인, 객체면 사용 객체가 아니면 console에 에러메세지 표시
+              object =
+                typeof object === "object"
+                  ? object
+                  : console.error("need to check type");
+              // 빈배열 생성
+              let temp = [];
+              //
+              for (let text of object) {
+                // text객체의 language -> name 이 "ko"일떄, temp 배열에 넣어준다.
+                if (text.language.name === "ko") {
+                  temp.push(text.flavor_text);
+                }
+              }
+              return temp;
+            };
+            // 데이터에서 필요한 내용만 객체에 다시 담아준다.
+            let setObj = {
+              id: _POKEMON_API.order,
+              name: _POKEMON_API.names[2].name,
+              imgUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png`,
+              description: getDescriptionString(
+                _POKEMON_API.flavor_text_entries
+              ),
+            };
+            // 인스턴스 만들기
+            let tempObject = new PokemonData(
+              setObj.id,
+              setObj.name,
+              setObj.imgUrl,
+              setObj.description
+            );
+            // 배열에 담기
+            // 제일 위에 빈 배열로 만든 totalData에 tempObject를 담아준다.
+            totalData.push(tempObject);
+          });
+        }
+        return totalData;
+      }
+      //위 함수에 최종 total data 거르고 거른 포켓몬의 필요 데이터 객체들이 담겨준있음
+      let total = setPokemonJsonData(1, 905);
+      console.log(total);
+    </script>
+  </body>
+</html>
+
+<!-- API 가공 code -->

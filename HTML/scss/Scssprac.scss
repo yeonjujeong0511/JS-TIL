@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$colors: (#111, #222, #333, #444, #555);
+ul {
+  $index: 0;
+  @each $color-value in $colors {
+    & > li:nth-child(#{$index + 1}) {
+      background-color: $color-value;
+      $index: $index + 1;
+    }
+  }
+}
