@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      ul {
+        list-style-type: none;
+        padding: 1vw;
+      }
+      ul > li {
+        height: 3vh;
+      }
+      a {
+        color: aliceblue;
+      }
+      a:link {
+        text-decoration: none;
+      }
+      a:visited {
+        text-decoration: none;
+      }
+      a:hover {
+        background-color: coral;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #333;
+        overflow-x: hidden;
+      }
+      section {
+        width: 100vw;
+        height: 100vh;
+      }
+      section:nth-child(1) {
+        background-color: #d97386;
+      }
+      section:nth-child(2) {
+        background-color: #202e40;
+      }
+      section:nth-child(3) {
+        background-color: #d9d0c5;
+      }
+      section:nth-child(4) {
+        background-color: #8c3d20;
+      }
+      section:nth-child(5) {
+        background-color: #d98e73;
+      }
+      section:nth-child(6) {
+        background-color: #d97386;
+      }
+      section:nth-child(7) {
+        background-color: #bf9004;
+      }
+      section:nth-child(8) {
+        background-color: #8c5c03;
+      }
+      section:nth-child(9) {
+        background-color: #ec4e03;
+      }
+      section:nth-child(10) {
+        background-color: #d99f7e;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="menu">
+      <li><a href="#num-1">num-1</a></li>
+      <li><a href="#num-2">num-2</a></li>
+      <li><a href="#num-3">num-3</a></li>
+      <li><a href="#num-4">num-4</a></li>
+      <li><a href="#num-5">num-5</a></li>
+      <li><a href="#num-6">num-6</a></li>
+      <li><a href="#num-7">num-7</a></li>
+      <li><a href="#num-8">num-8</a></li>
+      <li><a href="#num-9">num-9</a></li>
+      <li><a href="#num-10">num-10</a></li>
+    </ul>
+    <section id="num-1"></section>
+    <section id="num-2"></section>
+    <section id="num-3"></section>
+    <section id="num-4"></section>
+    <section id="num-5"></section>
+    <section id="num-6"></section>
+    <section id="num-7"></section>
+    <section id="num-8"></section>
+    <section id="num-9"></section>
+    <section id="num-10"></section>
+    <script>
+      window.addEventListener("hashchange", function () {
+        // 이벤트를 작업하면 'hash'값이 바뀔때 일어난다. 라는 뜻으로 해석
+        // 여기서 말하는 hash가 html에서는 id로 명칭이 바뀐다.
+        // id가 그러하듯 문서내에서는 고유의 것 한개만 존재해야한다.
+        const urlHash = window.location.href;
+        // window 객체 즉 BOM API에는 document 뿐만 아니라 location이라는 객체가 형체로 존재한다.
+        let getValue = urlHash.substring(
+          urlHash.indexOf("#") + 1,
+          urlHash.length
+        );
+        console.log("id value string :", getValue);
+      });
+    </script>
+  </body>
+</html>
+<!-- 초창기 HTML, CSS를 익히는 과정에서 스타일링 할 때, 되도록이면 id 값을 스타일링에 사용하지 않는 방향으로 훈련을 진행했던 적이 있습니다. 강사의 논지는 id값을 스타일링용으로 사용하기에 아깝다는 것인데, 실제로 클래스 스타일링 만으로도 충분히 고유의 식별과 재활용식별 모두 가능하기 때문에 id를 스타일링에 사용하지 않아도 제한되는 사항은 딱히 있지 않습니다. 하지만 클래스는 전혀 하지 못하는 id만의 고유의 기능이 존재합니다.
+
+id는 그 자체로 '고유의 것' 이어야 한다는 전제가 붙는 것이 핵심입니다. 
+
+본예제의 짧은 부분(script만 나와있는)을 확인하면, 브라우저에서 가장 최상위 객체인 window에 이벤트를 설치한 것을 확인 하실 수 있습니다. 그리고 이벤트리스너에는 생전 처음보는 'hashchange' 라는 타입을 작성해 두었습니다. 본문 예제 전체가 나와있는 이미지에는 <li> 태그 자식으로 사양되었다고 했던 <a> 태그를 사용한 것을 확인할 수 있습니다. 그것도 id 값을 경로로 지정한 것까지, 여태 본적 없는 구조로 작성되어있습니다. 본 예제를 제대로 해석하기 위해서 그간 <a> 태그를 설명할 때 진행했던 틀린 정의를 바로 잡을 필요가 있습니다.
+
+
+<a> 태그는 말그대로 앵커, 닻의 역할을 해주는 태그로 하이퍼링크, 하이퍼텍스트의 근간이 되어주는 매우 중요한 태그임에는 변함이 없으나 그것이 꼭 다른 문서, 혹은 다른페이지로의 이동만을 뜻하지는 않는다는 것입니다. 바로 문서 내에서 어디인가 가지고 있는 id에 위치한 요소로 바로 이동도 가능합니다. 마치 영한사전의 a, b, c순으로 찾는 우리의 경험과 많이 닮았습니다.
+
+문서의 원하는 위치로 바로 이동하게끔 설계되어있는 점은 현재의 트랜드에도 매우 유효하게 작용하고, 스크립트 프로그래밍을 통해 드라마틱한 연출을 진행할 수 있게 되었습니다.
+
+javascript-48 예제와 컨셉을 응용하면, 마치 실제로 페이지가 이동하는 것과 같은 연출을 만들 수 있게 될 것입니다. 컨셉을 점검하는 과정에서 SPA(single page application)이 어떻게 페이지이동을 하지 않고, 다른 페이지 처럼 연출할 수 있는지를 점검한다면 react의 router, 통신에서의 router 등등 코드개발로나마 그 역할과 능력을 점검 할 수 있게 될 것입니다. -->

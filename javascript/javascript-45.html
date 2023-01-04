@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ul {
+        list-style-type: none;
+      }
+      #root {
+        width: 100vw;
+        height: 100vh;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #root > ul {
+        width: 50%;
+        height: 50%;
+        background-color: #fff;
+      }
+      #root > ul > li {
+        width: 100%;
+        height: calc(100% / 10);
+        text-align: center;
+      }
+      #root > ul > li:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- ul>li{list-$*10} -->
+      <ul>
+        <li data-list-index="1">list-1</li>
+        <li data-list-index="2">list-2</li>
+        <li data-list-index="3">list-3</li>
+        <li data-list-index="4">list-4</li>
+        <li data-list-index="5">list-5</li>
+        <li data-list-index="6">list-6</li>
+        <li data-list-index="7">list-7</li>
+        <li data-list-index="8">list-8</li>
+        <li data-list-index="9">list-9</li>
+        <li data-list-index="10">list-10</li>
+      </ul>
+    </div>
+    <script>
+      const root = document.getElementById("root");
+      const ul = root.children[0];
+      const liItem = ul.children;
+      let status = true;
+      ul.addEventListener("click", (e) => {
+        console.log(e.target.dataset.listIndex);
+        if (status) {
+          e.target.style.backgroundColor = "cadetblue";
+          status = false;
+        } else {
+          e.target.style.backgroundColor = "#fff";
+          status = true;
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- 본 예제에서 다루는 스크립트 파일은 익히 다루어본 기능, 이벤트 객체(event object)입니다.
+처음 소개했을 당시에는 addEventListener() 함수를 사용하면 '동작한다', event.target 이라는 객체가 만들어진다. 이러한 어휘로 소개했던 바있습니다. "객체가 만들어진다" 라는 것은 사실 정확한 설명이 아닙니다. 바로 '전달 받은 인자(arguments)'로 다시금 정정해야 옳습니다.
+이벤트 객체는 이벤트가 일어난 객체(태그가 아닌)의 일부 데이터를 '추출(extracting)' 하는 기능을 가지고 있습니다. 그래서 태그가 아닌 addEventListener()의 콜백함수 0번째 매개변수는 이벤트가 일어난 객체 중 일부 데이터를 객체로 전달 받은 것 입니다.
+
+흔히 서적에서나 정보에서 어렵게 설명하는 이유는 사실적시 때문인데, '인자로 전달받았다' 라는 짧은 문장을 이해하기까지 많은 허들이 존재해 초견에 이해하기가 쉽지 않습니다. 
+
+argument로 전달 받는 일련의 개념은 특히 node.js, 백엔드 환경에서 상당히 자주 사용하는 개념입니다. 어디로부터 데이터를 '받는다면' 그것을 '인자'로 하겠다. 라는 흐름이 백엔드 전반에 걸쳐 작용하는 흐름이기 때문입니다. 프론트엔드에서는 어떻게 '출력'할지에 목적을 두고, 다양한 데이터처리 방식보단 '예리한 제어'에 초점을 맞추어져 있습니다. 하지만 백엔드에서는 '어디서 어떻게' 데이터가 들어오고 어떤 일이 일어날지 모르는 상황을 대비하기 때문에, 콜백함수는 빠질 수 없는 기능이고 더 나아가 원석과 같은 데이터를 '정제'하는데 수많은 공정들이 발생하기 때문에 함수의 연결, 인자의 전달 규칙이 상당합니다.
+
+낯설은 방식으로 낯설은 개념을 설명하는 것보다 익숙한 방식을 선택하여 사용한 것이므로, HTML 정적페이지 관점으로 보기보단, '인수와 인자', 'parameter'와 'argument'로 관점을 확인 하는 것이 좋습니다.
+
+정적 페이지를 직접 작성하는 빈도가 점점더 줄어들게 되겠지만, 복습하는 기분으로 또는 기본기를 점검하는 기분으로 훈련을 진행해보시고, 더 나아가 '전달되는 인자' 개념을 숙지하시기 바랍니다. -->
