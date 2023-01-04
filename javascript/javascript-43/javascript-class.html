@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      class ElemnetMaker {
+        constructor(tagName, width, backgroundColor, content = "") {
+          this.tagName = tagName;
+          this.width = width;
+          this.backgroundColor = backgroundColor;
+          this.content = content;
+        }
+        // set은 인스턴스 '곧' 될 tagName의 셋팅을 하는 생성자 함수 전용 키워드
+        set tagName(value) {
+          if (typeof value === "string") {
+            // 매개변수 tagName 자리에 문자열 타입이 아니라면 에러가 발생
+            return (this._tagName = value);
+          }
+        }
+        set width(value) {
+          // 삼항연산자(ternart operator) 방식으로 처리
+          return (this._width = Number.isInteger(value)
+            ? value
+            : console.error("need integer"));
+        }
+        // get은 '결정이 완료 된' 값을 가져와 가공
+        // 위의 constructor 필드에 height값이 정의되어 있지 않은 것을 확인하고, 동시에 콘솔에 키(key)로 잡혀있는 것을 확인
+        get height() {
+          return this._width / 2; // setter에서 결정된 _width 키(key)값을 가공하여 height 키로 구성
+        }
+        makeElement() {
+          // 직접 인스턴스를 양산하는 '메서드' 입니다. 객체의 키로 존재하기 때문에 함수(function)가 아닌 메서드(method)로 부릅니다.
+          return `<${this._tagName} style="width:${this._width}px; height:${this.height}px; background-color:${this.backgroundColor};">${this.content}</${this._tagName}>`;
+        }
+      }
+      const root = document.getElementById("root");
+      const fromConstructFunc = new ElemnetMaker("div", 200, "salmon", "hello");
+      // 생성자 함수에서 인스턴스를 만들어내는 new 키워드를 통해 객체 하나를 찍어냈습니다.
+      console.dir(fromConstructFunc);
+      root.innerHTML = fromConstructFunc.makeElement();
+    </script>
+  </body>
+</html>
+
+<!-- 
+자바스크립트를 베이스로 개발을 시작한 주니어들이 가장 약한 부분을 꼽는다면 바로 '생성자 함수'의 응용을 꼽을 수 있습니다.
+상당히 딱딱한 규격을 요구하는 자바(JAVA)는 객체지향프로그래밍(Object oriented programming) '기반' 이기 때문에 본 예제와 같은 형식이 아니고서는 코드를 작성하기가 불가능에 가까운 반면, 자바스크립트는 너무나 유연한 멀티 페러다임 언어이기 때문에 유행따라 취향따라, 생산성따라 코드를 짜다보니 생성자 함수의 중요성을 놓치는 경우가 잦습니다. 본 예제와 같은 방식은 굳이 자바스크립트로 작성하지 않아도 된다는 점 때문에 '성향'면에서는 억지에 가깝습니다. 하지만 스케일이 큰 개발일 수록 생성자 함수의 의존도가 상당히 높아지는 경향과 타입스크립트의 강력한 정적 타입제어와 맞물려 객체를 만들때 이러한 class 구조로 정비하는 경향이 있습니다. 생�자바스크립트 생태계의 다양한 라이브러리가 생성자 함수기반으로 구축되어있는 점도 감안하고, 리액트의 기본골격이 클래스기반 이었던 점을 감안한다면, 이해에 필요한 학습비용은 그 값어치가 충분합니다. 
+
+본 예제에서 주요하게 확인할 사항은 바로 getter와 setter, 그리고 '직접 만드는 메서드'입니다. 객체 지향 프로그래밍에서 빠질 수 없는 개념이기 때문에 자바스크립트로 블루프린트(청사진) 만드는 방법을 익히신다면 무궁무진한 응용을 할 수 있습니다. 자료를 찾으시면서 많이 보셧을 Array.prototype.map() <-- 과 같이 메서드가 '프로토타입 문법'으로 바인딩 된 것 까지 능숙하게 이해하고 작성하는 시점까지를 많은 프레임워크와 라이브러리가 요구하는 이해사항이기도하고 성능면에서 어마어마한 효과를 낼 수 있습니다.
+
+정적으로 타입을 명시하는 것을 제외하면, 거의다 다양한 언어들이 class를 지원합니다. 다만 작성법(syntax)의 차이라서 실망스러울지도 모르겠습니다. 
+특히 뿌리가 같다고 할 수 있는 C++과 �JAVA의 클래스를 눈여겨 보시면, 놀랍도록 비슷한 것을 확인 할 수 있습니다! 자신감 가지시기 바랍니다. -->
