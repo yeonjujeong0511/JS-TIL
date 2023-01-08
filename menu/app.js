@@ -126,15 +126,20 @@ function displayMenuButtons() {
   });
 }
 
+
+// 두번째 섹션부분 - 랜덤출력부분
 const secondBox = document.getElementById("second-box");
 console.log(secondBox);
 const div = document.createElement("div");
 secondBox.appendChild(div);
 console.log(secondBox.children[0]);
 
+// 랜덤버튼
 const randomButton = document.querySelector("#second-box button");
 console.log(randomButton);
 
+
+// 랜덤버튼 클릭시 위에 메뉴들 중 하나 나오게 함
 randomButton.addEventListener("click", function () {
   secondBox.children[1].innerHTML =
     menu[parseInt(Math.random() * menu.length)].title;
