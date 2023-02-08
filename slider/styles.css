@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +10,7 @@
   height: 100vh;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 button {
@@ -34,4 +36,72 @@ button {
 .slide > img {
   width: 100%;
   height: 100%;
+}
+
+#slideShow {
+  width: 400px;
+  height: 300px;
+  position: relative;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+.slides {
+  width: 400px;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 0.5s ease-out;
+  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+.slides > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
+  height: auto;
+}
+.slides > div > img {
+  width: inherit;
+  -o-object-fit: contain;
+     object-fit: contain;
+  height: auto;
+}
+
+/* 첫 번째 슬라이드 가운데에 정렬하기위해
+첫번째 슬라이드만 margin-left조정 */
+span {
+  position: absolute;
+  color: black;
+  text-align: center;
+  padding: 10px 20px;
+  top: 50%;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+span:hover {
+  background-color: rgba(128, 128, 128, 0.11);
+}
+
+.prev {
+  left: 10px;
+}
+
+/* 이전 화살표에 마우스 커서가 올라가 있을때 
+이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
+.prev:hover {
+  transform: translateX(-10px);
+}
+
+.next {
+  right: 10px;
+}
+
+/* 다음 화살표에 마우스 커서가 올라가 있을때 
+이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
+.next:hover {
+  transform: translateX(10px);
 }/*# sourceMappingURL=styles.css.map */
